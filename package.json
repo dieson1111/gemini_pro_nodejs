@@ -15,7 +15,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "set-cmd": "node ./src/set-cmd.js",
-    "dev": "nodemon ."
+    "dev": "nodemon .",
+    "start": "node ./src/app.js"
   },
   "author": "",
   "license": "ISC",
