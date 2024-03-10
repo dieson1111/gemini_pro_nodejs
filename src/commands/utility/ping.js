@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js'
+import timers from 'node:timers/promises'
 
 export const ping = {
   data: new SlashCommandBuilder()
@@ -7,5 +8,6 @@ export const ping = {
 
   async execute(interaction) {
     await interaction.reply('Pong!')
+    await interaction.followUp('Pong again!')
   },
 }
