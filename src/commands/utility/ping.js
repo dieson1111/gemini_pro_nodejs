@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from 'discord.js'
-import timers from 'node:timers/promises'
 
 export const ping = {
   data: new SlashCommandBuilder()

@@ -30,6 +30,7 @@ for (const folder of commandFolders) {
       try {
         // Import the command
         const command = (await import(filePath))[commandName]
+        console.log(`Registering command: ${commandName}`)
         // Set a new item in the Collection with the key as the command name and the value as the exported module
         if ('data' in command && 'execute' in command) {
           commands.push(command.data.toJSON())
@@ -47,13 +48,40 @@ for (const folder of commandFolders) {
 
 const rest = new REST({}).setToken(TOKEN)
 try {
+  // Register the commands
   console.log('Started refreshing application (/) commands.')
-
   await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
     body: commands,
   })
-
   console.log('Successfully reloaded application (/) commands.')
+
+  // // Delete the commands
+  // console.log('Deleting application (/) commands.')
+  // // delete guild-based commands, where commandId is the ID of the command you want to delete
+  // rest
+  //   .delete(Routes.applicationGuildCommand(CLIENT_ID, GUILD_ID, 'commandId'))
+  //   .then(() => console.log('Successfully deleted guild command'))
+  //   .catch(console.error)
+
+  // // delete global commands, where commandId is the ID of the command you want to delete
+  // rest
+  //   .delete(Routes.applicationCommand(CLIENT_ID, 'commandId'))
+  //   .then(() => console.log('Successfully deleted application command'))
+  //   .catch(console.error)
+
+  // // delete all guild-based commands
+  // rest
+  //   .put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), { body: [] })
+  //   .then(() => console.log('Successfully deleted all guild commands.'))
+  //   .catch(console.error)
+
+  // // delete all global commands
+  // rest
+  //   .put(Routes.applicationCommands(CLIENT_ID), { body: [] })
+  //   .then(() => console.log('Successfully deleted all application commands.'))
+  //   .catch(console.error)
+
+  // console.log('Successfully deleted application (/) commands.')
 } catch (error) {
   console.error(error)
 }
