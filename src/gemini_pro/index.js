@@ -12,7 +12,7 @@ export const GeminiPro = {
     // For text-only input, use the gemini-pro model
     const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
 
-    console.log(`Running the AI: ${history}`)
+    // console.log(history)
     const chat = model.startChat({
       history: history,
       generationConfig: {

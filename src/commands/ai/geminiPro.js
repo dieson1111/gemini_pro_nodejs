@@ -17,15 +17,16 @@ export const geminiPro = {
     const prompt = interaction.options.getString('prompt')
 
     // get chat history
-    console.log(chatHistory)
     let history = chatHistory.get(userId) ?? []
-    console.log('chat history:', history)
 
     // defer reply
     await interaction.deferReply()
     // run the AI
     ai.run(prompt, history)
       .then((response) => {
+        if (response.length === 0) {
+          throw new Error('No response from the AI')
+        }
         interaction.editReply(response)
 
         // save chat history
